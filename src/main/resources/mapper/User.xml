@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhn.springboot.mapper.UserMapper">
+
+    <update id="update">
+        update subject
+        <set>
+            <if test="score != null">
+                score = #{score},
+            </if>
+            <if test="major != null">
+                major = #{major},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+<!--            <if test="A != null">-->
+<!--                A = #{A}-->
+<!--            </if>-->
+<!--            <if test="B != null">-->
+<!--                B = #{B}-->
+<!--            </if>-->
+<!--            <if test="C != null">-->
+<!--                C = #{C}-->
+<!--            </if>-->
+<!--            <if test="D != null">-->
+<!--                D = #{D}-->
+<!--            </if>-->
+<!--            <if test="E != null">-->
+<!--                E = #{E}-->
+<!--            </if>-->
+<!--            <if test="radio != null">-->
+<!--                radio = #{radio}-->
+<!--            </if>-->
+        </set>
+        <where>
+            sid = #{sid}
+        </where>
+    </update>
+
+</mapper>

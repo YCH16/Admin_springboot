@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhn.springboot.mapper.StudentMapper">
+    <update id="update">
+        update student
+        <set>
+
+            <if test="password!=null">
+                password = #{password},
+            </if>
+            <if test="truename!=null">
+                truename = #{truename},
+            </if>
+            <if test="gender!=null">
+                gender = #{gender},
+            </if>
+            <if test="tele!=null">
+                tele = #{tele},
+            </if>
+            <if test="coll!=null">
+                coll = #{coll},
+            </if>
+            <if test="classname!=null">
+                classname = #{classname}
+            </if>
+        </set>
+        <where>
+                username = #{username}
+        </where>
+    </update>
+    <insert id="insertAndsave">
+        insert student
+        <set>
+            <if test="username!=null">
+                username = #{username},
+            </if>
+            <if test="password==null">
+                password = "123456",
+            </if>
+            <if test="password!=null">
+                password = #{password},
+            </if>
+            <if test="truename!=null">
+                truename = #{truename},
+            </if>
+            <if test="gender!=null">
+                gender = #{gender},
+            </if>
+            <if test="tele!=null">
+                tele = #{tele},
+            </if>
+            <if test="coll!=null">
+                coll = #{coll},
+            </if>
+            <if test="classname!=null">
+                classname = #{classname}
+            </if>
+
+        </set>
+    </insert>
+    <resultMap id="BaseResultMap" type="com.yhn.springboot.entity.Student">
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="truename" jdbcType="VARCHAR" property="truename" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        username, `password`,nickname,
+    </sql>
+    <!--<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from user
+        where id = #{id,jdbcType=INTEGER}
+    </select>-->
+
+    <!--<insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.yhn.springboot.entity.Student" useGeneratedKeys="true">
+        insert into user (username, nickname, `password`
+        )
+        values (#{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
+               )
+    </insert>-->
+
+
+
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace= "com.yhn.springboot.mapper.MajorMapper">
+    <update id="update">
+        update major
+        <set>
+            <if test="mno!=null">
+                mno = #{mno}
+            </if>
+            <if test="mname!=null">
+                mname = #{mname}
+            </if>
+        </set>
+        <!--<where>
+            mno = #{mno}
+        </where>-->
+    </update>
+</mapper>

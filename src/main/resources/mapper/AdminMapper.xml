@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace= "com.yhn.springboot.mapper.AdminMapper">
+    <resultMap id="BaseResultMap" type="com.yhn.springboot.entity.Admin">
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        username, `password`
+    </sql>
+    <!--<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from user
+        where id = #{id,jdbcType=INTEGER}
+    </select>-->
+    <select id="selectAll" resultType="com.yhn.springboot.entity.Admin">
+        select <include refid="Base_Column_List" />
+        from manager
+    </select>
+    <select id="selectByUsernameAndPassword" resultType="com.yhn.springboot.entity.Admin">
+        select <include refid="Base_Column_List" />
+        from manager where username = #{username} and password = #{password}
+    </select>
+
+    <!--<insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.yhn.springboot.entity.Student" useGeneratedKeys="true">
+        insert into user (username, nickname, `password`
+        )
+        values (#{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
+               )
+    </insert>-->
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.yhn.springboot.entity.Admin" useGeneratedKeys="true">
+        insert into student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username != null">
+                username,
+            </if>
+            <if test="nickname != null">
+                nickname,
+            </if>
+            <if test="password != null">
+                `password`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null">
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yhn.springboot.entity.Admin">
+        update student
+        <set>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                `password` = #{password,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yhn.springboot.entity.Admin">
+        update student
+        set username = #{username,jdbcType=VARCHAR},
+            nickname = #{nickname,jdbcType=VARCHAR},
+            `password` = #{password,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
